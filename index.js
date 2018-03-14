@@ -1,6 +1,7 @@
 var myVar;
 var timePlayer1;
 var timePlayer2;
+var audio = new Audio('Chess Clock.mp3');
 
 var button = document.getElementsByClassName("form__button")[0];
 var main = document.getElementsByClassName("main")[0];
@@ -14,8 +15,8 @@ var exit = document.getElementsByClassName("exit")[0];
 
 class Time {
     constructor(minute){
-        this.minute = minute - 1;
-        this.second = 10;
+        this.minute = minute;
+        this.second = 60;
         this.stringMinute = "";
         this.stringSecond = "";
     }
@@ -26,7 +27,7 @@ class Time {
             }
             else{
                 this.minute = this.minute - 1;
-                this.second = 9;
+                this.second = 59;
             }
         }
     }
@@ -54,8 +55,8 @@ button.addEventListener('click', function(){
     timePlayer1 = document.getElementsByClassName('form__input')[0].value;
     timePlayer2 = document.getElementsByClassName('form__input')[1].value;
     
-    time1.minute = timePlayer1;
-    time2.minute = timePlayer2;
+    time1.minute = timePlayer1 - 1;
+    time2.minute = timePlayer2 - 1;
 });
 
     
@@ -64,6 +65,7 @@ buttonClock1.addEventListener("click", function(){
     clearInterval(myVar);
     buttonClock1.classList.add("main__box--opacity");
     buttonClock2.classList.remove("main__box--opacity");
+    audio.play();
     myVar = setInterval(function(){ stoper(time2); }, 1000);  
 });
 
@@ -71,6 +73,7 @@ buttonClock2.addEventListener("click", function(){
     clearInterval(myVar);
     buttonClock2.classList.add("main__box--opacity");
     buttonClock1.classList.remove("main__box--opacity");
+    audio.play();
     myVar = setInterval(function(){ stoper(time1); }, 1000); 
 });
 
